@@ -1,0 +1,19 @@
+/secrets
+
+# Per-directory rubbish
+.DS_Store
+Thumbs.db
+
+# Customisation and backups
+*.override
+*.override.*
+*~
+
+# Auto-generated files
+/.vscode
+/build/*
+!/build/.gitkeep
+/coverage
+/log
+/tmp
+*.log
