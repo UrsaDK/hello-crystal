@@ -3,10 +3,10 @@
 Build instructions for various OS:
   - MacOS:
     ```
-    crystal build --release src/hello_world.cr -o build/hello-world.darwin`
+    crystal build --release src/hello_world.cr -o build/hello-world.x86_64-darwin`
     ```
 
   - Linux:
     ```
-    crystal build --static --release src/hello_world.cr -o build/hello-world.linux
+    crystal build --static --release src/hello_world.cr -o build/hello-world.x86_64-linux
     ```
