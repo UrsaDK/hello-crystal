@@ -1,12 +1,28 @@
 # Hello World: Crystal
 
-Build instructions for various OS:
-  - MacOS:
-    ```
-    crystal build --release src/hello_world.cr -o build/hello-world.x86_64-darwin`
-    ```
+- [Optional] Install all dependencies:
+  ```
+  make lib
+  ```
 
-  - Linux:
-    ```
-    crystal build --static --release src/hello_world.cr -o build/hello-world.x86_64-linux
-    ```
+- Run all the tests and create a development binary:
+  ```
+  make
+  ```
+
+  The above command is the equivalent of running
+
+  ```
+  make tests
+  make targets
+  ```
+
+- Create a new release binary:
+  ```
+  make release
+  ```
+
+- Remove all build artefacts:
+  ```
+  make clean
+  ```
