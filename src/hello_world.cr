@@ -1,19 +1,20 @@
 require "colorize"
 
-module Output
+module HelloWorld
   extend self
 
-  def prompt
-    "=>".colorize(:red)
+  def show_greeting
+    STDOUT.puts("=> #{stream("stdout")} #{greeting}")
+    STDERR.puts("=> #{stream("stderr")} #{greeting}")
   end
 
-  def hello
-    "Hello".colorize(:green)
+  private def stream(name : String)
+    name.upcase.colorize(:red)
   end
 
-  def world
-    "World".colorize(:yellow)
+  private def greeting
+    "Hello World".colorize(:yellow)
   end
 end
 
-puts "#{Output.prompt} #{Output.hello} #{Output.world}"
+HelloWorld.show_greeting
