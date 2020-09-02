@@ -7,13 +7,19 @@ Thumbs.db
 # Customisation and backups
 *.override
 *.override.*
+*\ copy
+*\ copy.*
 *~
 
 # Auto-generated files
+/.shards
 /.vscode
-/build/*
-!/build/.gitkeep
+/bin
+/build
 /coverage
+/lib
 /log
 /tmp
+/VERSION
+*.dwarf
 *.log
