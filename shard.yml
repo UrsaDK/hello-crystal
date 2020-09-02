@@ -1,0 +1,26 @@
+name: hello-world
+version: 0.1.0
+
+authors:
+  - Dmytro Konstantinov <ursa.dk@icloud.com>
+
+description: |
+  Hello world script used for testing and experimentation
+
+repository: https://github.com/UrsaDK/hello-crystal
+
+targets:
+  hello-world:
+    main: src/hello_world.cr
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ">= 0.12.0"
+  spectator:
+    gitlab: arctic-fox/spectator
+    version: ">= 0.9.23"
+
+crystal: 0.35.1
+
+license: GPL-2.0
