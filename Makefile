@@ -1,17 +1,20 @@
-.PHONY: lib targets tests release clean \
-				linux-x86_64 darwin-x86_64
 ARCH := $(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m)
 
-all: tests targets
+.PHONY: all lib debug release test
+all: tests debug
 lib: shard.lock
+debug: targets garbage-collect
+release: shard.lock $(ARCH) garbage-collect
+test: tests
 
 # Test and development tools
 # --------------------------
 
+.PHONY: targets
 targets: shard.lock
 	@shards build --progress --debug
-	@rm -f bin/*.dwarf
 
+.PHONY: tests
 tests: shard.lock
 	./bin/ameba --all
 	@echo
@@ -25,20 +28,23 @@ shard.lock: shard.yml
 # Build the release
 # -----------------
 
-release: shard.lock $(ARCH)
-	@rm -f build/*.dwarf
-
+.PHONY: linux-x86_64
 linux-x86_64:
-	@shards --production build --release --static --progress
+	@shards --production build --release --no-debug --static --progress
 
+.PHONY: darwin-x86_64
 darwin-x86_64:
-	@shards --production build --release --progress
+	@shards --production build --release --no-debug --progress
 
 # Remove development artefacts
 # ----------------------------
 
-clean:
-	@find . -type f \( -name .DS_Store -o -name "*.dwarf" \) -exec rm -f {} \;
-	@rm -R -fv lib/* | grep -E "^removed directory: 'lib/[^/]+'" || :
-	@find ./bin -type f -not -name docker -exec rm -fv {} \;
+.PHONY:	garbage-collect
+garbage-collect:
+	@find . -type f \( -name .DS_Store -o -name "*.dwarf" \) -delete
+
+.PHONY: clean
+clean: garbage-collect
+	@find ./lib -depth 1 -print -delete
+	@find ./bin -type f -not -name docker -print -delete
 	@touch shard.yml
